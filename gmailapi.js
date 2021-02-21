@@ -30,7 +30,7 @@ function handleClientLoad() {
     updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
 
 }, function(error) {
-    appendPre(JSON.stringify(error, null, 2));
+    alert(JSON.stringify(error, null, 2));
 });
 }
 
@@ -79,8 +79,7 @@ function updateSigninStatus(isSignedIn) {
            getMailInfo(data.messages[i].id,userId,oauthToken);
 
         }
-       // console.log(data);
-        // GET https://gmail.googleapis.com/gmail/v1/users/{userId}/messages/{id}
+
     }
 
     }
@@ -113,26 +112,7 @@ function updateSigninStatus(isSignedIn) {
                 }
             }
         }
-            
-
-  function displayInbox() {
-    var request = gapi.client.gmail.users.messages.list({
-      'userId': 'me',
-      'labelIds': 'INBOX',
-      'maxResults': 10
-    });
-
-    request.execute(function(response) {
-        $.each(response.messages, function() {
-          var messageRequest = gapi.client.gmail.users.messages.get({
-            'userId': 'me',
-            'id': this.id
-          });
-    
-          messageRequest.execute(appendMessageRow);
-        });
-      });
-    }
+        
 
 
     function appendMailRow(from,subject,date) {
